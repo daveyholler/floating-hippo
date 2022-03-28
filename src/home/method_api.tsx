@@ -24,13 +24,13 @@ export const MethodApi: React.FC = () => {
     >
       <EuiPanel hasBorder>
         <EuiTitle size="xs">
-          <h3>Your endpoint is: </h3>
+          <h3>Enter a name to preview your new API endpoint</h3>
         </EuiTitle>
-        <EuiSpacer size='m' />
-        {endpoint ? (
-          <EuiCode>https://my-es-url.aws.com/23782837/es/{endpoint}</EuiCode>
-        ) : (
-          <EuiCode>Set a name for your Search Index</EuiCode>
+        {endpoint && (
+          <>
+            <EuiSpacer size='m' />
+            <EuiCode>https://my-es-url.aws.com/23782837/es/{endpoint}</EuiCode>
+          </>
         )}
         <EuiSpacer size="l" />
         <p>The existing API instructions should render here.</p>

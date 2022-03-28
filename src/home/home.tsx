@@ -1,50 +1,104 @@
 import { useState } from 'react';
 
-import { EuiButton, EuiButtonGroup, EuiPageTemplate, EuiSpacer } from '@elastic/eui';
+import {
+  EuiButton,
+  EuiButtonGroup,
+  EuiCheckableCard,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiLink,
+  EuiPageTemplate,
+  EuiPanel,
+  EuiSpacer,
+  EuiText,
+  EuiTitle,
+} from '@elastic/eui';
 
 import { SideNav } from './sidenav';
 import { MethodCrawler } from './method_crawler';
 import { MethodApi} from './method_api';
 import { MethodEs} from './method_es';
 
+interface CardLabelProps {
+  title: string;
+  description: string;
+}
+
 export default function Home() {
-  const [selectedMethod, setSelectedMethod] = useState({ id: 'crawler', label: 'Web Crawler' });
-  
-  const saveButton = <EuiButton fill>Create search index</EuiButton>
-  const searchIndexType = 'Web Crawler'
+  const [selectedMethod, setSelectedMethod] = useState({ id: '', label: 'Web Crawler' });
+  const [methodIsSelected, setMethodIsSelected] = useState(false);
   
   const buttonGroupOptions = [
-    { id: 'crawler', label: 'Web Crawler' },
-    { id: 'api', label: 'API Endpoint' },
-    { id: 'connector', label: 'Connector' },
-    { id: 'elasticsearch', label: 'ES Index' },
+    { id: 'crawler', label: 'Web Crawler', description: "Automatically index content from your website or knowlege base" },
+    { id: 'api', label: 'API Endpoint', description: "POST your documents to an API endpoint" },
+    { id: 'connector', label: 'Connector', description: "Import documents from third party sources like Google Drive or Confluence" },
+    { id: 'elasticsearch', label: 'ES Index', description: "Connect to an existing Elasticsearch index" },
+    { id: 'json', label: 'Paste or upload JSON', description: "Manually upload JSON files" },
   ];
 
   const handleMethodChange = (val: string) => {
     const selected: any = buttonGroupOptions.find((b) => b.id === val);
     setSelectedMethod(selected);
+    setMethodIsSelected(true);
   }
+  const NewSearchIndexLayout = () => (
+    <>
+      {selectedMethod.id === 'crawler' && <MethodCrawler />}
+      {selectedMethod.id === 'api' && <MethodApi/>}
+      {selectedMethod.id === 'elasticsearch' && <MethodEs/>}
+    </> 
+  );
+  
+  const CardLabel: React.FC<CardLabelProps> = ({ title, description }) => (
+    <span style={{ minWidth: "13rem", width: 'calc(100% - .5rem)', display: "inline-block" }}>
+      <EuiTitle size="xxs"><h4>{title}</h4></EuiTitle>
+      <EuiText size="s"><p>{description}</p></EuiText>
+    </span>
+  )
+  
+  const SelectSearchIndexLayout = () => (
+    <>
+      <EuiFlexGroup>
+        <EuiFlexItem grow={false} style={{ maxWidth: "22rem" }}>
+          <EuiPanel color="primary" grow={false} >
+            <EuiTitle size="xs"><h4>Create a Search Index</h4></EuiTitle>
+            <EuiSpacer size="xs" />
+            <EuiText size="s">
+              <p>Add your content to Enterprise Search by creating a Search Index. <EuiLink href="#" target="_blank">Learn more about Search Indices</EuiLink></p>  
+            </EuiText>
+            <EuiSpacer />
+            <EuiFlexGroup direction="column" gutterSize="s" alignItems="flexStart">
+              {buttonGroupOptions.map(item => (
+                <EuiFlexItem style={{ width: 'calc(100% - .5rem)' }}>
+                  <EuiCheckableCard
+                    id={`method_${item.id}`}
+                    label={ <CardLabel title={item.label} description={item.description} /> }
+                    value={item.id}
+                    name="method_options"
+                    onChange={() => handleMethodChange(item.id)}
+                    checked={selectedMethod.id === item.id}
+                  />
+                </EuiFlexItem>
+              ))}
+            </EuiFlexGroup>
+          </EuiPanel>
+        </EuiFlexItem>
+        <EuiFlexItem>
+          {methodIsSelected && <NewSearchIndexLayout />}
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    </>
+  );
+  
   return (
     <EuiPageTemplate
       pageSideBar={<SideNav/>}
       pageHeader={{
-        pageTitle: `New ${selectedMethod.label}`,
-        rightSideItems: [saveButton]
+        pageTitle: 'New Search Index'
       }}
       style={{minHeight: 'calc(100vh - 7rem)'}}
     >
-      {/* FOR PROTOTYPE ONLY */}
-      <EuiButtonGroup
-        legend="Select an index method"
-        options={buttonGroupOptions}
-        idSelected={selectedMethod.id}
-        onChange={(val) => handleMethodChange(val)}
-      />
-      <EuiSpacer size='l' />
-      {/* END: FOR PROTOTYPE ONLY */}
-      {selectedMethod.id === 'crawler' && <MethodCrawler />}
-      {selectedMethod.id === 'api' && <MethodApi/>}
-      {selectedMethod.id === 'elasticsearch' && <MethodEs/>}
+      <SelectSearchIndexLayout />
     </EuiPageTemplate>
   );
 };

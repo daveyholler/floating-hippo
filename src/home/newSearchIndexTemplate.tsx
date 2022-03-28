@@ -48,7 +48,16 @@ export const NewSearchIndexTemplate: React.FC<ISearchIndex> = ({ children, descr
   }
 
   return (
-    <EuiFlexGroup>
+    <EuiFlexGroup direction="column">
+      {/* <EuiFlexItem grow={false}>
+        <EuiPanel color="primary" style={{ maxWidth: '25rem'}} >
+          <EuiText size="s">
+            <EuiTitle><h4>About the {type}</h4></EuiTitle>
+            <p>{description}</p>
+            <EuiButton iconSide="right" size="s" iconType="popout" href={docsUrl} target="_blank">Read the docs</EuiButton>
+          </EuiText>
+        </EuiPanel>
+      </EuiFlexItem> */}
       <EuiFlexItem grow>
         <EuiFormRow label={`Name your ${type.toLowerCase()}`} fullWidth>
           <EuiFieldText
@@ -68,15 +77,6 @@ export const NewSearchIndexTemplate: React.FC<ISearchIndex> = ({ children, descr
         </EuiFormRow>
         <EuiSpacer />
         {children}
-      </EuiFlexItem>
-      <EuiFlexItem grow={false}>
-        <EuiPanel color="primary" style={{ maxWidth: '25rem'}} grow={false}>
-          <EuiText size="s">
-            <EuiTitle><h4>About the {type}</h4></EuiTitle>
-            <p>{description}</p>
-            <EuiButton iconSide="right" size="s" iconType="popout" href={docsUrl} target="_blank">Read the docs</EuiButton>
-          </EuiText>
-        </EuiPanel>
       </EuiFlexItem>
     </EuiFlexGroup>
   )
