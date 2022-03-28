@@ -14,6 +14,7 @@ import {
   EuiTitle,
 } from '@elastic/eui';
 
+import { SearchIndexEmptyState } from './empty_state';
 import { SideNav } from './sidenav';
 import { MethodCrawler } from './method_crawler';
 import { MethodApi} from './method_api';
@@ -60,7 +61,7 @@ export default function Home() {
     <>
       <EuiFlexGroup>
         <EuiFlexItem grow={false} style={{ maxWidth: "22rem" }}>
-          <EuiPanel color="primary" grow={false} >
+          <EuiPanel color="subdued" grow={false} >
             <EuiTitle size="xs"><h4>Create a Search Index</h4></EuiTitle>
             <EuiSpacer size="xs" />
             <EuiText size="s">
@@ -84,7 +85,7 @@ export default function Home() {
           </EuiPanel>
         </EuiFlexItem>
         <EuiFlexItem>
-          {methodIsSelected && <NewSearchIndexLayout />}
+          {methodIsSelected ? <NewSearchIndexLayout /> : <SearchIndexEmptyState />}
         </EuiFlexItem>
       </EuiFlexGroup>
     </>

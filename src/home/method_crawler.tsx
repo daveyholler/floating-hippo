@@ -8,7 +8,7 @@ import { NewSearchIndexTemplate } from './newSearchIndexTemplate';
 export const MethodCrawler: React.FC = () => {
   return (
     <NewSearchIndexTemplate
-      description="Looking to use the web crawler? Well that's great. You can get started right here by adding your domain and Enterprise Search will do the rest."
+      description="The Elastic Web Crawler allows you to easily and automatically index content from public-facing websites and knowledge bases."
       docsUrl="https://google.com"
       type='Web Crawler'
     >
