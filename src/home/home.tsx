@@ -32,9 +32,9 @@ export default function Home() {
   const buttonGroupOptions = [
     { id: 'crawler', label: 'Web Crawler', description: "Automatically index content from your website or knowlege base" },
     { id: 'api', label: 'API Endpoint', description: "POST your documents to an API endpoint" },
-    { id: 'connector', label: 'Connector', description: "Import documents from third party sources like Google Drive or Confluence" },
+    { id: 'connector', label: 'Connector (WIP)', description: "Import documents from third party sources like Google Drive or Confluence" },
     { id: 'elasticsearch', label: 'ES Index', description: "Connect to an existing Elasticsearch index" },
-    { id: 'json', label: 'Paste or upload JSON', description: "Manually upload JSON files" },
+    { id: 'json', label: 'Paste or upload JSON (WIP)', description: "Manually upload JSON files" },
   ];
 
   const handleMethodChange = (val: string) => {
