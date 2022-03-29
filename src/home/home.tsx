@@ -7,6 +7,7 @@ import {
   EuiCode,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiIcon,
   EuiLink,
   EuiPageTemplate,
   EuiPanel,
@@ -25,6 +26,7 @@ import { MethodConnector } from './method_connector';
 interface CardLabelProps {
   title: string;
   description: any;
+  icon: string;
 }
 
 export default function Home() {
@@ -32,11 +34,11 @@ export default function Home() {
   const [methodIsSelected, setMethodIsSelected] = useState(false);
   
   const buttonGroupOptions = [
-    { id: 'crawler', label: 'Web Crawler', description: "Automatically index content from your website or knowlege base" },
-    { id: 'api', label: 'API Endpoint', description:  <EuiText size="s">Use a variety of client libraries to <EuiCode>POST</EuiCode> documents to your Search Index</EuiText>},
-    { id: 'connector', label: 'Connector (WIP)', description: "Ingest data from content sources like GitHub, Google Drive or SharePoint" },
-    { id: 'elasticsearch', label: 'ES Index', description: "Connect to an existing Elasticsearch index" },
-    { id: 'json', label: 'Paste or upload JSON (WIP)', description: "Manually upload JSON files" },
+    { id: 'crawler', icon: 'globe', label: 'Web Crawler', description: "Automatically index content from your website or knowlege base" },
+    { id: 'api', icon: 'visVega', label: 'API', description:  <EuiText size="xs">Use a variety of client libraries to <EuiCode>POST</EuiCode> documents to your Search Index</EuiText>},
+    { id: 'connector', icon: 'package', label: 'Connector', description: "Ingest data from content sources like GitHub, Google Drive or SharePoint" },
+    { id: 'elasticsearch', icon: 'logoElasticsearch', label: 'Elasticsearch Index', description: "Connect to an existing Elasticsearch index" },
+    { id: 'json', icon: 'document', label: 'Paste or upload JSON', description: "Manually upload JSON files" },
   ];
 
   const handleMethodChange = (val: string) => {
@@ -53,10 +55,20 @@ export default function Home() {
     </> 
   );
   
-  const CardLabel: React.FC<CardLabelProps> = ({ title, description }) => (
+  const CardLabel: React.FC<CardLabelProps> = ({ title, description, icon }) => (
     <span style={{ minWidth: "13rem", width: 'calc(100% - .5rem)', display: "inline-block" }}>
-      <EuiTitle size="xxs"><h4>{title}</h4></EuiTitle>
-      <EuiText size="s"><p>{description}</p></EuiText>
+      <EuiFlexGroup gutterSize="s" alignItems="center">
+        <EuiFlexItem grow={false}>
+          <EuiIcon type={icon} color="text" />
+        </EuiFlexItem>
+        <EuiFlexItem>
+          <EuiTitle size="xxs">
+            <h4>{title}</h4>
+          </EuiTitle>
+        </EuiFlexItem>
+      </EuiFlexGroup>
+      <EuiSpacer size="xs" />
+      <EuiText size="xs">{description}</EuiText>
     </span>
   )
   
@@ -64,19 +76,19 @@ export default function Home() {
     <>
       <EuiFlexGroup>
         <EuiFlexItem grow={false} style={{ maxWidth: "22rem" }}>
-          <EuiPanel color="subdued" grow={false} >
+          <EuiPanel hasShadow={false} paddingSize="none" grow={false} >
             <EuiTitle size="xs"><h4>Create a Search Index</h4></EuiTitle>
             <EuiSpacer size="xs" />
             <EuiText size="s">
-              <p>Add your content to Enterprise Search by creating a Search Index. <EuiLink href="#" target="_blank">Learn more about Search Indices</EuiLink></p>  
+              <p>Add your content to Enterprise Search by creating a Search Index.</p>
             </EuiText>
-            <EuiSpacer />
+            <EuiSpacer size="m" />
             <EuiFlexGroup direction="column" gutterSize="s" alignItems="flexStart">
               {buttonGroupOptions.map(item => (
                 <EuiFlexItem style={{ width: 'calc(100% - .5rem)' }}>
                   <EuiCheckableCard
                     id={`method_${item.id}`}
-                    label={ <CardLabel title={item.label} description={item.description} /> }
+                    label={ <CardLabel title={item.label} description={item.description} icon={item.icon} /> }
                     value={item.id}
                     name="method_options"
                     onChange={() => handleMethodChange(item.id)}
@@ -85,6 +97,8 @@ export default function Home() {
                 </EuiFlexItem>
               ))}
             </EuiFlexGroup>
+            <EuiSpacer size="m" />
+            <EuiLink href="#" target="_blank">Learn more about Search Indices</EuiLink>
           </EuiPanel>
         </EuiFlexItem>
         <EuiFlexItem>

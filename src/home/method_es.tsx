@@ -17,7 +17,7 @@ export const MethodEs: React.FC = () => {
   }
   return (
     <NewSearchIndexTemplate
-      description="Looking to use an existing Elasticsearch index? That's great. We know more than a thing or two about that."
+      description="Serve results from an existing Elasticsearch index alongside your other content. Use Enterprise Search features like curations and relevance tuning."
       docsUrl="https://google.com"
       type='Elasticsearch index'
       onNameChange={(value: string) => onNameChange(value)}

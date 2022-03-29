@@ -1,7 +1,5 @@
 import {
-  EuiLink,
   EuiPanel,
-  EuiText,
   EuiTitle
 } from '@elastic/eui';
 

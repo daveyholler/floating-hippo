@@ -1,8 +1,13 @@
-import { EuiEmptyPrompt, EuiLink, EuiTitle } from '@elastic/eui';
+import {
+  EuiEmptyPrompt,
+  EuiLink,
+  EuiPanel,
+  EuiTitle
+} from '@elastic/eui';
 
 export const SearchIndexEmptyState: React.FC = () => {
   return (
-    <>
+    <EuiPanel color="subdued">
       <EuiEmptyPrompt
         title={<h3>Add content to Enterprise Search</h3>}
         body={
@@ -17,6 +22,6 @@ export const SearchIndexEmptyState: React.FC = () => {
           </>
         }
       />
-    </>
+    </EuiPanel>
   )
 }
