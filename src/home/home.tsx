@@ -4,6 +4,7 @@ import {
   EuiButton,
   EuiButtonGroup,
   EuiCheckableCard,
+  EuiCode,
   EuiFlexGroup,
   EuiFlexItem,
   EuiLink,
@@ -19,10 +20,11 @@ import { SideNav } from './sidenav';
 import { MethodCrawler } from './method_crawler';
 import { MethodApi} from './method_api';
 import { MethodEs} from './method_es';
+import { MethodConnector } from './method_connector';
 
 interface CardLabelProps {
   title: string;
-  description: string;
+  description: any;
 }
 
 export default function Home() {
@@ -31,8 +33,8 @@ export default function Home() {
   
   const buttonGroupOptions = [
     { id: 'crawler', label: 'Web Crawler', description: "Automatically index content from your website or knowlege base" },
-    { id: 'api', label: 'API Endpoint', description: "POST your documents to an API endpoint" },
-    { id: 'connector', label: 'Connector (WIP)', description: "Import documents from third party sources like Google Drive or Confluence" },
+    { id: 'api', label: 'API Endpoint', description:  <EuiText size="s">Use a variety of client libraries to <EuiCode>POST</EuiCode> documents to your Search Index</EuiText>},
+    { id: 'connector', label: 'Connector (WIP)', description: "Ingest data from content sources like GitHub, Google Drive or SharePoint" },
     { id: 'elasticsearch', label: 'ES Index', description: "Connect to an existing Elasticsearch index" },
     { id: 'json', label: 'Paste or upload JSON (WIP)', description: "Manually upload JSON files" },
   ];
@@ -47,6 +49,7 @@ export default function Home() {
       {selectedMethod.id === 'crawler' && <MethodCrawler />}
       {selectedMethod.id === 'api' && <MethodApi/>}
       {selectedMethod.id === 'elasticsearch' && <MethodEs/>}
+      {selectedMethod.id === 'connector' && <MethodConnector/>}
     </> 
   );
   

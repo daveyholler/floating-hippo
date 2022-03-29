@@ -2,8 +2,10 @@ import { useState } from 'react';
 
 import {
   EuiCode,
+  EuiLink,
   EuiPanel,
   EuiSpacer,
+  EuiText,
   EuiTitle
 } from '@elastic/eui';
 
@@ -17,7 +19,7 @@ export const MethodApi: React.FC = () => {
   }
   return (
     <NewSearchIndexTemplate
-      description="So you want to use the API do ya? That's cool. We've got details on how to do that here."
+      description={<EuiText size="s">The <EuiLink href="#" target="_blank">documents API</EuiLink> can be used to add new documents to your engine, update documents, retrieve documents by id, and delete documents. There are a variety of <EuiLink href="#" target="_blank">client libraries</EuiLink> to help you get started.</EuiText>}
       docsUrl="https://google.com"
       type='API Endpoint'
       onNameChange={(value: string) => onNameChange(value)}

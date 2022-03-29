@@ -16,7 +16,7 @@ import {
 import { MethodCrawler } from './method_crawler';
 
 export interface ISearchIndex {
-  description: string;
+  description: any;
   docsUrl: string;
   type: string;
   onNameChange?: any;
