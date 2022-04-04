@@ -55,7 +55,7 @@ export const NewSearchIndexTemplate: React.FC<ISearchIndex> = ({
   }
 
   return (
-    <>
+    <EuiPanel hasBorder>
       <EuiFlexGroup direction="column">
         <EuiFlexItem grow={false}>
           <EuiTitle size="s"><h2>New {type}</h2></EuiTitle>
@@ -88,6 +88,6 @@ export const NewSearchIndexTemplate: React.FC<ISearchIndex> = ({
       <span>
         <EuiButton fill isDisabled={!name}>Create Search Index</EuiButton>
       </span>
-    </>
+    </EuiPanel>
   )
 }
